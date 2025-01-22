@@ -9,13 +9,16 @@ class Product():
         self.name = name
         self.price = price 
         self.quantity = quantity
-        self.active = False
+        self.active = quantity > 0
         
     def get_quantity(self):
         return self.quantity
     
     def set_quantity(self, quantity):
+        if not isinstance(quantity, (int, float)) or quantity <= 0:
+            print("Quantity must be a positive number")
         self.quantity = quantity
+        self.active = quantity > 0
     
     def is_active(self):
         return self.active
@@ -27,7 +30,7 @@ class Product():
         self.active = False
     
     def show(self):
-        return f"{self.name} ({self.quantity})"
+        return f"{self.name}, Price: ${self.price:.2f} ({self.quantity} units)"
     
     def buy(self, quantity):
         if not isinstance(quantity, (int, float)) or quantity <= 0:
